@@ -1,27 +1,49 @@
 import 'dart:math';
 
-void main() {
-  /// use the 'GetPrice' method to get the getPrice method
-  /// display the price using 'showPrices' method
+void main() async {
+//async await
+  double price =  await getPrice();
+  showPrices(double.parse(price.toStringAsFixed(2)));
 
-  /// bonus: 2dp
-
+//promise
   getPrice().then((val) {
-//print(val.toStringAsFixed(2));//prints randomized decimal
     showPrices(double.parse(val.toStringAsFixed(2)));
   });
 
-//showPrices(5.5); // prints 5.5
+//stream
+  Stream<double> stream = getPricesStream();
+  stream.listen((data) {
+    showPrices(double.parse(data.toStringAsFixed(2)));
+  });
+
 }
 
+
+
+//stream get a stream of random prices
+Stream<double> getPricesStream() async* {
+  final int numberOfResults = 5;
+  for (var i = 0; i < numberOfResults; i++) {
+    final price = await getPrice();
+    yield price;
+  }
+}
+
+
 Future<double> getPrice() {
-  final random = Random();
+  final randomPrice = Random();
+  //final randomTime = Random().nextInt(5) + 1;
   return Future.delayed(
-    Duration(seconds: 1),
-    () => random.nextDouble() * 1000,
+    Duration(seconds: randomTime()),
+    () => randomPrice.nextDouble() * 1000,
   );
 }
 
 void showPrices(double price) {
   print(price);
 }
+
+int randomTime() {
+  return Random().nextInt(5) + 1;
+}
+
