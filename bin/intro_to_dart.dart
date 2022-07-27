@@ -8,7 +8,7 @@ void main(List<String> arguments) {
   double height = 153.00;
   double weight = 46.5;
   bool something = true;
-var color_list = ['red', 'green', 'yellow', 'blue'];
+  var color_list = ['red', 'green', 'yellow', 'blue'];
   int month = 4;
 
 //print(name);
@@ -30,7 +30,7 @@ var color_list = ['red', 'green', 'yellow', 'blue'];
   checkAge(age);
   checkMonth(month);
   loopColor();
-whileLoop();
+  whileLoop();
 }
 
 // NORMAL FUNCTION
@@ -104,20 +104,19 @@ checkMonth(month) {
 
 // FOR LOOP
 loopColor() {
-for (int i=0; i<10; i++){
-print(i);
-}
+  for (int i = 0; i < 10; i++) {
+    print(i);
+  }
 }
 // FOR-EACH LOOP
 
-
 // WHILE LOOP
 whileLoop() {
-int i = 0;
-while(i<5){
-print(i);
-i++;
-}
+  int i = 0;
+  while (i < 5) {
+    print(i);
+    i++;
+  }
 }
 
 // DO-WHILE LOOP
