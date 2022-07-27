@@ -1,13 +1,13 @@
-void main() {
+void main() async {
 
-printSomething(2, "after 2 seconds");
-printSomething(1, "after 1 second");
+await printSomething(2, "after 2 seconds");
+await printSomething(1, "after 1 second");
 
 }
 
-void printSomething(int seconds, String message) {
+Future<void> printSomething(int seconds, String message) async {
 //Dummy async operation
-Future.delayed(Duration(seconds:seconds), (){
+await Future.delayed(Duration(seconds:seconds), (){
 print(message);
 });
 }
