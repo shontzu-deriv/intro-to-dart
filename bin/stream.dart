@@ -1,7 +1,7 @@
 import 'dart:math';
 
 void main() async {
-//async await
+//async await (getPrice is a future, need to await)
 //   double price =  await getPrice();
 //   showPrices(double.parse(price.toStringAsFixed(2))); // function expects 2 params: price & time
 
@@ -13,7 +13,7 @@ void main() async {
 //stream (decides in advance what to do with a future piece of data while dart event loop continues)
   Stream priceStream = getPricesStream();
   priceStream.listen((data) {
-    showPrices(double.parse(data.price.toStringAsFixed(2)),data.time, data.dt);
+    showPrices(double.parse(data.price.toStringAsFixed(2)), data.time, data.dt);
   });
 }
 
@@ -23,7 +23,6 @@ class Details {
   DateTime dt;
   Details(int this.time, double this.price, DateTime this.dt);
 }
-
 
 //stream get a stream of random prices
 Stream<Details> getPricesStream() async* {
@@ -51,7 +50,6 @@ Future<double> getPrice(int randomTime) {
   );
 }
 
-void showPrices(double price,int time, DateTime dt) {
+void showPrices(double price, int time, DateTime dt) {
   print('price: $price \t time: ${time}s \t timeout: $dt');
 }
-

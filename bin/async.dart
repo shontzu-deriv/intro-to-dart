@@ -13,6 +13,8 @@ void main() async {
 // in below case, 3 second finish and execute first (no await 5 seconds)
   printSomething(5, "after 5 seconds");
   printSomething(3, "after 3 seconds");
+
+  //TODO: await a variable price which is randomized by a function getPrice then print the variable
 }
 
 Future<void> printSomething(int seconds, String message) async {
