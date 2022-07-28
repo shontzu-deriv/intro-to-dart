@@ -1,6 +1,6 @@
 // Parent class (constructor for Human)
-class Human{
-  void walk(){
+class Human {
+  void walk() {
     print("humans walk");
   }
 }

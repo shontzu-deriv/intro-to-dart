@@ -1,4 +1,4 @@
-abstract class LivingEntity{
+abstract class LivingEntity {
   void eat();
 }
 
@@ -25,7 +25,7 @@ main() {
   ];
 
   //equivalent of v-for loop to print (v-for item in items)
-  for(LivingEntity entity in LivingEntities){
+  for (LivingEntity entity in LivingEntities) {
     entity.eat();
   }
 

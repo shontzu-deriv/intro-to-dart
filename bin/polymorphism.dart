@@ -1,12 +1,12 @@
 class Animal {
-  void makeSound(){
+  void makeSound() {
     print("Animal make sound");
   }
 }
 
 class Duck extends Animal {
   @override
-  void makeSound()=>print("Quack");
+  void makeSound() => print("Quack");
 }
 
 class Cat extends Animal {

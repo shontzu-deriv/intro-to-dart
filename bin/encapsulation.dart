@@ -1,4 +1,4 @@
-class Car{
+class Car {
   void StartEngine() {
     _runEngineMotorStarter();
     doSomethingElse();
@@ -6,7 +6,7 @@ class Car{
   }
 
   // methods starting with _ is private, only accessible by this class
-  void _runEngineMotorStarter(){
+  void _runEngineMotorStarter() {
     print("energize selenoid");
     print("pull plunder");
   }
