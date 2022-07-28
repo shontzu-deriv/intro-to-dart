@@ -23,7 +23,7 @@ class ArmoredSpaceShip implements SpaceShip {
   @override
   hit() {
     health = HSSS.firePower;
-    print("ArmoredSpaceShip got hit");
+    print("ArmoredSpaceShip got hit \t (damage:${HSSS.firePower}) \t (health $health)");
   }
 
   @override
@@ -36,7 +36,7 @@ class ArmoredSpaceShip implements SpaceShip {
   int firePower = 100;
 
   @override
-  int health = 2000;
+  // int health = 2000;
 
   @override
   String name = "Armored Ship";
@@ -48,7 +48,7 @@ class HighSpeedSpaceShip implements SpaceShip {
   @override
   hit() {
     health = health - ASS.firePower;
-    print("HighSpeedSpaceShip got hit");
+    print("HighSpeedSpaceShip got hit \t (damage:${ASS.firePower}) \t (health $health)");
   }
 
   @override
@@ -80,12 +80,11 @@ class BattleField {
 
     // when ASS || HSSS health is not yet 0, continue battle
     do {
-      //call function to randomize dodge
-      // call function to deduct health
-      //deduct the health of the ship that is selected
-      // hitShip.health = hitShip.health - hitShip.firePower;
+      //todo: call dodge function to randomize dodge
+      //todo: call armor function to randomize armor
+
+      //call hit function to inflict damage
       hitShip.hit();
-      // print("${hitShip.name} got hit\t(health:${hitShip.health})");
       //toggle the i between 1 (HSSS) and 0 (ASS)
       i = (i + 1) % 2;
       hitShip = ships[i];
