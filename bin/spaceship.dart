@@ -23,11 +23,13 @@ class ArmoredSpaceShip implements SpaceShip {
   @override
   void hit() {
     print("ArmoredSpaceShip got hit");
+    print("Armored Spaceship won");
   }
 
   @override
   void destroyed() {
     print("ArmoredSpaceShip destroyed");
+    print("High Speed Spaceship won");
   }
 
   @override
@@ -51,6 +53,7 @@ class HighSpeedSpaceShip implements SpaceShip {
   @override
   void destroyed() {
     print("HighSpeedSpaceShip destroyed");
+    print("Armored Spaceship won");
   }
 
   @override
@@ -69,24 +72,30 @@ final HSSS = HighSpeedSpaceShip();
 
 class BattleField {
   void startBattle() {
-      // take turn one of the ASS or HSSS to get hit
-      var ships = [ASS, HSSS];
-      var i = Random().nextInt(ships.length);
-      var hitShip = ships[i];
+    // take turn one of the ASS or HSSS to get hit
+    var ships = [ASS, HSSS];
+    var i = Random().nextInt(ships.length); // initialize i as 1 (HSSS)
+    var hitShip = ships[i];
 
     // when ASS || HSSS health is not yet 0, continue battle
     do {
-      // deduct health of the randomly selected ship
-      hitShip.health = hitShip.health - hitShip.firePower;
-      print("${hitShip.name} got hit (health:${hitShip.health})");
-      i = (i+1) %2;
+      //call function to randomize dodge
+      // call function to deduct health
+      //deduct the health of the ship that is selected
+      hitShip.health = hitShip.health -
+          hitShip.firePower; //todo: should be called from function
+      print(
+          "${hitShip.name} got hit\t(health:${hitShip.health})"); //todo: should be called from function
+      //toggle the i between 1 (HSSS) and 0 (ASS)
+      i = (i + 1) % 2;
       hitShip = ships[i];
     } while (ASS.health != 0 && HSSS.health != 0);
 
+    // check who won, run destroyed function
     if (ASS.health == 0) {
-      print("High Speed Spaceship won");
+      ASS.destroyed();
     } else {
-      print("Armored Spaceship won");
+      HSSS.destroyed();
     }
   }
 }
