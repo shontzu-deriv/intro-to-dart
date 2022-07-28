@@ -8,11 +8,11 @@ class SpaceShip {
   SpaceShip(this.health, this.firePower, this.name);
 
   //Methods
-  void hit() {
+  hit() {
     print("hit");
   }
 
-  void destroyed() {
+  destroyed() {
     print("destroyed");
   }
 }
@@ -21,13 +21,13 @@ class ArmoredSpaceShip implements SpaceShip {
   int maxArmorPower = 100;
 
   @override
-  void hit() {
+  hit() {
+    health = HSSS.firePower;
     print("ArmoredSpaceShip got hit");
-    print("Armored Spaceship won");
   }
 
   @override
-  void destroyed() {
+  destroyed() {
     print("ArmoredSpaceShip destroyed");
     print("High Speed Spaceship won");
   }
@@ -46,12 +46,13 @@ class HighSpeedSpaceShip implements SpaceShip {
   bool dodge = true;
 
   @override
-  void hit() {
+  hit() {
+    health = health - ASS.firePower;
     print("HighSpeedSpaceShip got hit");
   }
 
   @override
-  void destroyed() {
+  destroyed() {
     print("HighSpeedSpaceShip destroyed");
     print("Armored Spaceship won");
   }
@@ -82,10 +83,9 @@ class BattleField {
       //call function to randomize dodge
       // call function to deduct health
       //deduct the health of the ship that is selected
-      hitShip.health = hitShip.health -
-          hitShip.firePower; //todo: should be called from function
-      print(
-          "${hitShip.name} got hit\t(health:${hitShip.health})"); //todo: should be called from function
+      // hitShip.health = hitShip.health - hitShip.firePower;
+      hitShip.hit();
+      // print("${hitShip.name} got hit\t(health:${hitShip.health})");
       //toggle the i between 1 (HSSS) and 0 (ASS)
       i = (i + 1) % 2;
       hitShip = ships[i];
@@ -106,6 +106,8 @@ void main() {
 }
 
 printShip() {
-  print("ASS:\t\t MaxArmorPower ${ASS.maxArmorPower} \t health ${ASS.health} \t firePower ${ASS.firePower}");
-  print("HSSS:\t\t Dodge ${HSSS.dodge} \t\t health ${HSSS.health} \t firePower ${HSSS.firePower}");
+  print(
+      "ASS:\t\t MaxArmorPower ${ASS.maxArmorPower} \t health ${ASS.health} \t firePower ${ASS.firePower}");
+  print(
+      "HSSS:\t\t Dodge ${HSSS.dodge} \t\t health ${HSSS.health} \t firePower ${HSSS.firePower}");
 }
