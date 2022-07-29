@@ -18,12 +18,23 @@ class SpaceShip {
 }
 
 class ArmoredSpaceShip implements SpaceShip {
-  int maxArmorPower() => Random().nextInt(100) + 11; //value between 10 to 100
+  @override
+  int firePower = 200;
 
   @override
+  int health = 2000;
+
+  @override
+  String name = "Armored Spaceship";
+
+  Random random = Random();
+  double maxArmorPower() =>
+      random.nextDouble(); // randomize armor power in percentage value
+  @override
   hit() {
-    var damage = HSSS.firePower-maxArmorPower();
-    health = health - damage;
+    //use percentage to calculate damage value (damage = 1-armor)
+    int damage = ((1 - maxArmorPower()) * HSSS.firePower).toInt();
+    health = (health - damage).toInt();
     print("Armored Spaceship got hit \t (damage:$damage) \t (health $health)");
   }
 
@@ -32,27 +43,27 @@ class ArmoredSpaceShip implements SpaceShip {
     print("Armored Spaceship destroyed");
     print("Highspeed Spaceship won");
   }
+}
 
+class HighSpeedSpaceShip implements SpaceShip {
   @override
-  int firePower = 100;
+  int firePower = 200;
 
   @override
   int health = 2000;
 
   @override
-  String name = "Armored Spaceship";
-}
+  String name = "Highspeed Spaceship";
 
-class HighSpeedSpaceShip implements SpaceShip {
-
-  bool dodge=false;
-
+  bool dodge = false;
+  Random random = Random();
   hit() {
-    dodge = Random().nextBool();
-    if (dodge == false){
-    health = health - ASS.firePower;
+    dodge = random.nextBool();
+    if (dodge == false) {
+      health = health - ASS.firePower;
     }
-    print("Highspeed Spaceship got hit \t (damage:${ASS.firePower}) \t (health $health)");
+    print(
+        "Highspeed Spaceship got hit \t (damage:${ASS.firePower}) \t (health $health)");
   }
 
   @override
@@ -60,15 +71,6 @@ class HighSpeedSpaceShip implements SpaceShip {
     print("Highspeed Spaceship destroyed");
     print("Armored Spaceship won");
   }
-
-  @override
-  int firePower = 100;
-
-  @override
-  int health = 2000;
-
-  @override
-  String name = "Highspeed Spaceship";
 }
 
 // create a new car object (instances)
@@ -83,29 +85,19 @@ class BattleField {
 
     // when ASS || HSSS health is not yet 0, continue battle
     do {
-      //todo: if ships[i] = ASS, trigger ASS armor function. Else, trigger HSSS dodge function.
-      if (i == 0) {
-        //todo: call HSSS dodge function to randomize dodge
-        //if dodge = true, damage = 0
-        //if dodge = false, damage = ASS.firePower
-      } else {
-        //todo: call armor function to randomize armor
-        //damage = HSSS.firePower - armorStrength
-      }
-
       //call hit function to inflict damage
       hitShip.hit();
-      //toggle i between 1 (HSSS) and 0 (ASS)
+      //change hitShip by toggling i between 1 and 0
       i = (i + 1) % 2;
       hitShip = ships[i];
-    } while (ASS.health != 0 && HSSS.health != 0);
+    } while (ASS.health > 0 && HSSS.health > 0);
 
     // check who won, run destroyed function
-    if (ASS.health == 0) {
-      ASS.destroyed();
-    } else {
-      HSSS.destroyed();
-    }
+    ships.forEach((ship) {
+      if (ship.health <= 0) {
+        ship.destroyed();
+      }
+    });
   }
 }
 
@@ -115,10 +107,10 @@ void main() {
 }
 
 printShip() {
-  print("------------------------------------------------------------------");
+  print("--------------------------------------------------------------");
   print(
-      "ASS:\t\t MaxArmorPower ${ASS.maxArmorPower} \t health ${ASS.health} \t firePower ${ASS.firePower}");
+      "ASS: \t health ${ASS.health} \t firePower ${ASS.firePower}");
   print(
-      "HSSS:\t\t Dodge ${HSSS.dodge} \t\t health ${HSSS.health} \t firePower ${HSSS.firePower}");
-  print("------------------------------------------------------------------");
+      "HSSS: \t health ${HSSS.health} \t firePower ${HSSS.firePower}");
+  print("--------------------------------------------------------------");
 }
